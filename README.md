@@ -3,40 +3,61 @@
 A small Python CLI demonstrating model-generated correction of tool arguments.
 The application never edits the source stock data. No external stock API is used.
 
-## Setup (PowerShell, Python 3.11+)
+## Quick start (PowerShell, Python 3.11+)
 
 Run these commands from this project folder:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -e '.[test]'
+.\.venv\Scripts\python.exe -m pip install -e '.[test]'
 Copy-Item .env.example .env
 ```
 
-Edit `.env` and set `OPENAI_API_KEY` and `OPENAI_MODEL` to a tool-capable OpenAI
-model available to your account. The application uses `ChatOpenAI` with
-`use_responses_api=True`; model selection is intentionally explicit.
-
-By default, the source is your home directory plus
-`OneDrive/Desktop/provectus-task/synthetic_messy_stock_prices.json`.
-To use the included unchanged copy of the generated fixture instead, set:
+Edit `.env` and fill in your own API key and a tool-capable OpenAI model ID
+available to your account:
 
 ```dotenv
+OPENAI_API_KEY=your-api-key
+OPENAI_MODEL=your-model-id
 STOCK_DATA_PATH=data/synthetic_messy_stock_prices.json
 ```
 
-Relative paths resolve from the process working directory. Then run:
+The example configuration uses the included fixture, so no Desktop or OneDrive
+folder is required. Keep the commands below in the project folder: relative paths
+resolve from the process working directory. The application uses `ChatOpenAI` with
+`use_responses_api=True`; model selection is intentionally explicit.
+
+Run the automated tests, then start the CLI:
 
 ```powershell
-stock-price-agent
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.pytest-tmp
+.\.venv\Scripts\stock-price-agent.exe
 ```
 
-Ask `Get the stock price of AAPL.` or `Get all stock prices.`. `/new` creates an
+Tests use a scripted model and make no API calls. Starting the CLI requires both
+OpenAI settings; submitting a stock request makes API calls using your account.
+The commands above do not require virtual-environment activation.
+
+For the first demonstration, enter:
+
+```text
+Get the stock price of AAPL.
+```
+
+Expect two raw records, a validation error for each string price, model-generated
+integer retries, and a final `VERIFIED OUTCOME` with `status: complete` and both
+record IDs (`1` and `13`) validated at `150`. The live trace is included in
+`LIVE_SMOKE_TRACE.txt`.
+
+You can also ask `Get all stock prices.`. `/new` creates an
 isolated conversation; `/exit` quits. History persists only while this process
 runs. Every user request gets fresh source snapshots and retry budgets. Within a
 request, the first fetch pins the complete dataset, so later fetches cannot change
 the source being verified or reset attempts.
+
+To use another dataset, change `STOCK_DATA_PATH`. If it is unset, the application
+falls back to your home directory plus
+`OneDrive/Desktop/provectus-task/synthetic_messy_stock_prices.json`.
 
 ## What the demonstration proves
 
@@ -101,7 +122,7 @@ unrecoverable source; it must appear under `failed`, not as a fabricated integer
 ## Automated acceptance tests (no credentials or API calls)
 
 ```powershell
-python -m pytest -q --basetemp=.pytest-tmp
+.\.venv\Scripts\python.exe -m pytest -q --basetemp=.pytest-tmp
 ```
 
 Tests inject a scripted `BaseChatModel` into the real `create_agent` graph. They
@@ -121,7 +142,7 @@ trajectory over all records fits. Exhaustion produces an incomplete outcome.
 
 This is separate from deterministic tests and requires credentials and API usage.
 
-1. Configure `.env`, run `stock-price-agent`, and request AAPL.
+1. Configure `.env`, run `.\.venv\Scripts\stock-price-agent.exe`, and request AAPL.
 2. Inspect the real trace: fetch returns both raw strings; each raw validation call
    produces `TOOL ERROR`; subsequent model-generated calls contain integer `150`.
 3. Confirm errors and responses retain their originating call IDs, retries occur
