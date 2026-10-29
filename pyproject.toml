@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stock-price-agent"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "langchain==1.4.7", "langchain-core==1.7.1", "langchain-openai==1.7.3",
+  "langgraph==1.2.18", "pydantic==2.14.1", "python-dotenv==1.2.4", "simplejson==4.2.0"
+]
+
+[project.optional-dependencies]
+test = ["pytest==9.2.0"]
+
+[project.scripts]
+stock-price-agent = "stock_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

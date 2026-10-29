@@ -1,0 +1,17 @@
+[
+  {"id":1,"symbol":"AAPL","company":"Apple Inc.","date":"2026-10-01","price":"$150.00","volume":"1,250,000","change":"+1.25%","currency":"USD"},
+  {"id":2,"symbol":" msft ","company":"Microsoft","date":"10/02/2026","price":312,"volume":980000,"change":-0.8,"currency":"usd"},
+  {"id":3,"symbol":"GOOGL","company":"Alphabet Inc","date":"Oct 3, 2026","price":"  $142.75  ","volume":"2.4M","change":"-0.50 %","currency":"USD"},
+  {"id":4,"symbol":"AMZN","company":"Amazon.com, Inc.","date":"2026/10/04","price":"175,50","volume":"850 000","change":"unchanged","currency":"USD"},
+  {"id":5,"symbol":"TSLA","company":"TESLA","date":"2026-10-05T16:00:00Z","price":"USD 245.99","volume":"3,100,500","change":"+3.2%","currency":"USD"},
+  {"id":6,"symbol":"NVDA","company":"Nvidia Corp.","date":"06-10-2026","price":"1,025.40","volume":"N/A","change":null,"currency":"USD"},
+  {"id":7,"symbol":"META","company":"Meta Platforms","date":"2026-10-07","price":null,"volume":"760000","change":"N/A","currency":"USD"},
+  {"id":8,"symbol":"NFLX","company":"Netflix, Inc.","date":"2026-10-08","price":"","volume":null,"change":"--","currency":"USD"},
+  {"id":9,"symbol":"SAP","company":"SAP SE","date":"09.10.2026","price":"€198,30","volume":"420.000","change":"+0,75%","currency":"EUR"},
+  {"id":10,"symbol":"VOD.L","company":"Vodafone Group","date":"2026-10-10","price":"£0.72","volume":"5m","change":"-2%","currency":"GBP"},
+  {"id":11,"symbol":"IBM","company":"International Business Machines","date":"2026-02-30","price":"$-12.00","volume":-1500,"change":"+999%","currency":"USD"},
+  {"id":12,"symbol":"ORCL","company":" Oracle Corporation ","date":"","price":"not available","volume":"unknown","change":"0%","currency":"US dollars"},
+  {"id":13,"symbol":"aapl","company":"Apple Inc.","date":"2026-10-01","price":"150","volume":"1250000","change":"1.25 percent","currency":"USD"},
+  {"id":14,"symbol":null,"company":"Unknown Company","date":null,"price":true,"volume":"12K","change":"NaN","currency":""},
+  {"id":15,"symbol":"INTC","company":"Intel Corporation","date":"2026-10-15","price":"$32.4O","volume":"1,2OO,000","change":" + 0.6 % ","currency":"USD"}
+]
